@@ -68,7 +68,8 @@
 <script>
     $(function () {
         $('#play').on('click', function () {
-            let player = new Player($('#name').html());
+            name = $('#name').val();
+            let player = new Player(name);
             player.play(LEVELS.EASY, $('#game-board'));
         });
     });
