@@ -61,8 +61,12 @@ class Player {
             $('#messages-row').html(mine ? `You succeed!, not it's your ${this.opponentName} turn.` : `${this.opponentName} succeed!, now it's your turn.`);
             uncover($('.square').eq(index), val);
         });
-        this.client.on('gameEnd', win => {
-            $('#messages-row').html(win ? 'You won!!!' : 'You lost!');
+        this.client.on('gameEnd', winner => {
+            if (winner == -1) {
+                $('#messages-row').html("It's a draw!");
+            } else {
+                $('#messages-row').html(winner == this.client.id ? 'You won!!!' : 'You lost!');
+            }
         });
         
         this.client.emit('login', name);

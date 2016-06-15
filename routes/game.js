@@ -110,9 +110,12 @@ function subscribe(socketIoServer) {
                         socket.partner.emit('match', index, board[index].val, false);
                         board[index].covered = false;
                         socket.score++;
+                        
                         if (!--socket.game.coveredPairsCount) {
-                            socket.emit('gameEnd', socket.score > socket.partner.score);
-                            socket.partner.emit('gameEnd', socket.score < socket.partner.score);
+                            let result = socket.score != socket.partner.score ? 
+                                -1 : socket.score > socket.partner.score ? socket.id : socket.partner.id;
+                            socket.emit('gameEnd', result);
+                            socket.partner.emit('gameEnd', result);
                         }
                     } else {
                         socket.emit('fail', socket.prevIndex, index, board[index].val, true);
