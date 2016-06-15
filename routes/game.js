@@ -1,6 +1,16 @@
 'use strict'
 
 /**
+ *
+ * @param server
+ * @param room
+ */
+function popClient(server, room) {
+    let key = Object.keys(room.sockets)[0];
+    return server.sockets.adapter.nsp.connected[key];
+}
+
+/**
  * Shuffles the elements of an array
  * @param arr - the array
  */
@@ -13,12 +23,6 @@ function shuffle(arr) {
         arr[j] = x;
     }
 }
-
-/**
- * Waiting list
- * @type {{}}
- */
-const waitingList = {};
 
 /**
  * Represents the levels of a game
@@ -66,36 +70,35 @@ class Game {
  * @param socketIoServer
  */
 function subscribe(socketIoServer) {
-    // Subscribe on new client connection
-    socketIoServer.on('connection', (socket) => {
-        console.log(socket.name + ' has connected');
-        socket.on('disconnect', () => {
-            console.log(socket.name + ' has disconnected');
-        });
-        socket.on('findPartner', (level, name) => {
+    const rooms = socketIoServer.sockets.adapter.rooms;
+    socketIoServer.on('connection', socket => {
+        socket.on('login', name => {
             socket.name = name;
-            if (waitingList[level]) {
-                if (waitingList[level].length > 0) {
-                    let boardSize = BOARD_SIZES[level];
-                    let game = new Game(boardSize.rows, boardSize.cols)
-                    let socket2 = waitingList[level].pop()
+            console.log('\n' + socket.name + ' has connected\n');
+        })
+        socket.on('disconnect', () => {
+            if (socket.name)
+                console.log('\n' + socket.name + ' has disconnected\n');
+        });
+        socket.on('findPartner', level => {
+            socket.join(level);
+            if (rooms[level].length > 1) {
+                socket.leave(level);
+                let boardSize = BOARD_SIZES[level];
+                let game = new Game(boardSize.rows, boardSize.cols);
+                let socket2 = popClient(socketIoServer, rooms[level]);
+                socket2.leave(level);
 
-                    game.currTurn = socket2;
+                game.currTurn = socket2;
+                socket.partner = socket2;
+                socket.game = game;
+                socket.score = 0;
+                socket2.partner = socket;
+                socket2.game = game;
+                socket2.score = 0;
 
-                    socket.partner = socket2;
-                    socket.game = game;
-                    socket.score = 0;
-                    socket2.partner = socket;
-                    socket2.game = game;
-                    socket2.score = 0;
-
-                    socket.emit('gameStart', boardSize.rows, boardSize.cols, false, socket2.name);
-                    socket2.emit('gameStart', boardSize.rows, boardSize.cols, true, socket.name);
-                } else {
-                    waitingList[level].push(socket);
-                }
-            } else {
-                waitingList[level] = [socket,]
+                socket.emit('gameStart', boardSize.rows, boardSize.cols, false, socket2.name);
+                socket2.emit('gameStart', boardSize.rows, boardSize.cols, true, socket.name);
             }
         });
         socket.on('uncoverRequest', index => {

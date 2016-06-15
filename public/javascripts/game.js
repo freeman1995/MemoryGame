@@ -11,9 +11,8 @@ const LEVELS = {
 };
 
 /**
- *
+ * 
  * @param jSquare
- * @param val
  */
 function cover(jSquare) {
     jSquare.removeClass('flip');
@@ -36,10 +35,16 @@ function uncover(jSquare, val, callback) {
  */
 class Player {
     /**
-     *
+     * 
+     * @param name
+     * @param jBoard
      */
-    constructor(name) {
-        this.client = io('188.166.30.133:3000');
+    constructor(name, jBoard) {
+        this.client = io('localhost:3000');
+        this.opponentName = null;
+        this.jBoard = jBoard;
+        this.name = name;
+        
         this.client.on('squareUncover', (index, val) => {
             uncover($('.square').eq(index), val);
         });
@@ -59,17 +64,21 @@ class Player {
         this.client.on('gameEnd', win => {
             $('#messages-row').html(win ? 'You won!!!' : 'You lost!');
         });
-        this.name = name;
-        this.opponentName = null;
+        
+        this.client.emit('login', name);
+    }
+
+    disconnect() {
+        this.client.disconnect();
     }
 
     /**
      * Starts new game
      */
-    play(level, jBoard) {
+    play(level) {
         this.client.once('gameStart', (rows, cols, myTurn, opponentName) => {
             this.opponentName = opponentName;
-            
+
             // draw board
             let boardContent = `<tr><td id="messages-row" colspan="${cols}"></td></tr>`;
             for (let i = 0; i < rows; i++) {
@@ -90,8 +99,8 @@ class Player {
                 }
                 boardContent += '</tr>';
             }
-            jBoard.html(boardContent);
-
+            this.jBoard.html(boardContent);
+            
             // handle board square clicks
             let thisRef = this;
             $('.square').click(function () {
@@ -101,6 +110,6 @@ class Player {
 
             // Notify on first turn
             $('#messages-row').html(myTurn ? "You start." : `${opponentName} starts.`);
-        }).emit('findPartner', level, this.name);
+        }).emit('findPartner', level);
     }
 }

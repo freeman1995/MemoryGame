@@ -54,8 +54,13 @@
 <body>
 
 <h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<br/>
+<br/>
+<h4 id="current-user"></h4>
 <label for="name">Enter your name asshole:&nbsp;&nbsp;</label><input id="name" type="text"/>
+<button type="button" id="login" class="btn btn-primary">Login!</button>
+<br/>
+<label for="level">Level:&nbsp;&nbsp;</label><select id="level"></select>
 <button type="button" id="play" class="btn btn-primary">Play!</button>
 <table id="game-board"></table>
 
@@ -66,11 +71,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.6/socket.io.min.js"></script>
 <script src="/javascripts/game.js"></script>
 <script>
+    'use strict';
+
+    let player;
+
     $(function () {
+        $.each(LEVELS, function (key, value) {
+            $('#level').append($('<option></option>').attr("value", value).text(key));
+        });
+        $('#login').on('click', function () {
+            if (player) {
+                player.disconnect();
+            }
+            player = new Player($('#name').val(), $('#game-board'));
+            $('#current-user').html(`Logged as ${$('#name').val()}`);
+            $('#game-board').html(null);
+        });
         $('#play').on('click', function () {
-            name = $('#name').val();
-            let player = new Player(name);
-            player.play(LEVELS.EASY, $('#game-board'));
+            player.play($('#level').val());
+            $('#game-board').html('Waiting for opponent...');
         });
     });
 </script>
