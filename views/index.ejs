@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"
+          integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <style>
+        /* entire container, keeps perspective */
+        .flip {
+            perspective: 1000px;
+        }
+
+        /* flip the pane when hovered */
+        .flip .flipper {
+            transform: rotateY(180deg);
+        }
+
+        .flip, .square, .card {
+            width: 100px;
+            height: 100px;
+        }
+
+        /* flip speed goes here */
+        .flipper {
+            transition: 0.6s;
+            transform-style: preserve-3d;
+
+            position: relative;
+        }
+
+        /* hide back of pane during swap */
+        .front, .back {
+            backface-visibility: hidden;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* front pane, placed above back */
+        .front {
+            z-index: 2;
+            /* for firefox 31 */
+            transform: rotateY(0deg);
+        }
+
+        /* back, initially hidden pane */
+        .back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+<table id="game-board"></table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"
+        integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.6/socket.io.min.js"></script>
+<script src="/javascripts/game.js"></script>
+<script>
+    $(function () {
+        let player = new Player();
+        player.play(LEVELS.EASY, $('#game-board'));
+    });
+</script>
+
+</body>
+</html>
