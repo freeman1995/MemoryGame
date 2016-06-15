@@ -55,7 +55,8 @@
 
 <h1><%= title %></h1>
 <p>Welcome to <%= title %></p>
-<label for="name">Enter your name asshole: </label><input id="name" type="text"/>
+<label for="name">Enter your name asshole:&nbsp;&nbsp;</label><input id="name" type="text"/>
+<button type="button" id="play" class="btn btn-primary">Play!</button>
 <table id="game-board"></table>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -66,8 +67,10 @@
 <script src="/javascripts/game.js"></script>
 <script>
     $(function () {
-        let player = new Player($('#name').html());
-        player.play(LEVELS.EASY, $('#game-board'));
+        $('#play').on('click', function () {
+            let player = new Player($('#name').html());
+            player.play(LEVELS.EASY, $('#game-board'));
+        });
     });
 </script>
 
