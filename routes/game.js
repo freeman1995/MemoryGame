@@ -72,7 +72,8 @@ function subscribe(socketIoServer) {
         socket.on('disconnect', () => {
             console.log(socket.name + ' has disconnected');
         });
-        socket.on('findPartner', (level) => {
+        socket.on('findPartner', (level, name) => {
+            socket.name = name;
             if (waitingList[level]) {
                 if (waitingList[level].length > 0) {
                     let boardSize = BOARD_SIZES[level];
@@ -88,8 +89,8 @@ function subscribe(socketIoServer) {
                     socket2.game = game;
                     socket2.score = 0;
 
-                    socket.emit('gameStart', boardSize.rows, boardSize.cols, false);
-                    socket2.emit('gameStart', boardSize.rows, boardSize.cols, true);
+                    socket.emit('gameStart', boardSize.rows, boardSize.cols, false, socket2.name);
+                    socket2.emit('gameStart', boardSize.rows, boardSize.cols, true, socket.name);
                 } else {
                     waitingList[level].push(socket);
                 }

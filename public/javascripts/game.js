@@ -38,7 +38,7 @@ class Player {
     /**
      *
      */
-    constructor() {
+    constructor(name) {
         this.client = io('188.166.30.133:3000');
         this.client.on('squareUncover', (index, val) => {
             uncover($('.square').eq(index), val);
@@ -47,25 +47,29 @@ class Player {
             let firstSquare = $('.square').eq(uncoveredIndex);
             let secondSquare = $('.square').eq(coveredIndex);
             uncover(secondSquare, coveredVal, () => {
-                $('#messages-row').html(mine ? "You failed!, now it's your opponent turn." : "Opponent failed, now it's your turn.");
+                $('#messages-row').html(mine ? `You failed!, now it's ${this.opponentName} turn.` : `${this.opponentName} failed, now it's your turn.`);
                 cover(firstSquare);
                 cover(secondSquare);
             })
         });
         this.client.on('match', (index, val, mine) => {
-            $('#messages-row').html(mine ? "You succeed!, not it's your opponent turn." : "Opponent succeed!, now it's your turn.");
+            $('#messages-row').html(mine ? `You succeed!, not it's your ${this.opponentName} turn.` : `${this.opponentName} succeed!, now it's your turn.`);
             uncover($('.square').eq(index), val);
         });
         this.client.on('gameEnd', win => {
             $('#messages-row').html(win ? 'You won!!!' : 'You lost!');
         });
+        this.name = name;
+        this.opponentName = null;
     }
 
     /**
      * Starts new game
      */
     play(level, jBoard) {
-        this.client.once('gameStart', (rows, cols, myTurn) => {
+        this.client.once('gameStart', (rows, cols, myTurn, opponentName) => {
+            this.opponentName = opponentName;
+            
             // draw board
             let boardContent = `<tr><td id="messages-row" colspan="${cols}"></td></tr>`;
             for (let i = 0; i < rows; i++) {
@@ -96,7 +100,7 @@ class Player {
             });
 
             // Notify on first turn
-            $('#messages-row').html(myTurn ? "You start." : "Opponent starts.");
-        }).emit('findPartner', level);
+            $('#messages-row').html(myTurn ? "You start." : `${opponentName} starts.`);
+        }).emit('findPartner', level, this.name);
     }
 }
