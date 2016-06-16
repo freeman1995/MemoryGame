@@ -68,10 +68,15 @@ class Game {
 
 /**
  *
+ * @type {{}}
+ */
+const lobbies = {};
+
+/**
+ *
  * @param socketIoServer
  */
 function subscribe(socketIoServer, socket) {
-    const rooms = socketIoServer.sockets.adapter.rooms;
     socket.on('login', name => {
         socket.name = name;
         socket.emit('logged', socket.id);
@@ -79,19 +84,32 @@ function subscribe(socketIoServer, socket) {
     });
     socket.on('disconnect', () => {
         if (socket.name) {
-            socket.partner.emit('opponentLeft');
-            socket.partner.game = null;
+            if (socket.partner) {
+                socket.partner.emit('opponentLeft');
+                socket.partner.game = null;
+            }
+            if (socket.lobbyId) {
+                lobbies[socket.lobbyId] = null;
+            }
             console.log('\n' + socket.name + ' has disconnected\n');
         }
     });
     socket.on('findPartner', level => {
         if (!socket.name) return;
 
-        socket.join(level);
-        if (rooms[level].length > 1) {
-            socket.leave(level);
-            let socket2 = popClient(socketIoServer, rooms[level]);
-            socket2.leave(level);
+        // if already in other lobby or in a game, leave it
+        if (socket.lobbyId != null) {
+            lobbies[socket.lobbyId] = null;
+        } else if (socket.game) {
+            socket.partner.emit('opponentLeft');
+            socket.game = null;
+        }
+
+        // If lobby is not empty
+        if (lobbies[level]) {
+            let socket2 = lobbies[level];
+            socket2.lobbyId = null;
+            lobbies[level] = null;
 
             let game = new Game(BOARD_SIZES[level].rows, BOARD_SIZES[level].cols);
             game.currTurn = socket2;
@@ -104,6 +122,10 @@ function subscribe(socketIoServer, socket) {
 
             socket.emit('gameStart', BOARD_SIZES[level].rows, BOARD_SIZES[level].cols, false, socket2.name);
             socket2.emit('gameStart', BOARD_SIZES[level].rows, BOARD_SIZES[level].cols, true, socket.name);
+        } else {
+            // Join lobby
+            lobbies[level] = socket;
+            socket.lobbyId = level;
         }
     });
     socket.on('uncoverRequest', index => {
@@ -116,7 +138,7 @@ function subscribe(socketIoServer, socket) {
                 socket.partner.emit('success', index, game.board[index].val, false, socket.partner.score);
                 game.board[index].covered = false;
                 socket.score++;
-                
+
                 if (!--socket.game.coveredPairsCount) {
                     let result = socket.score == socket.partner.score ?
                         -1 : socket.score > socket.partner.score ? socket.id : socket.partner.id;
