@@ -80,6 +80,7 @@ function subscribe(socketIoServer, socket) {
     socket.on('disconnect', () => {
         if (socket.name) {
             socket.partner.emit('opponentLeft');
+            socket.game = null;
             console.log('\n' + socket.name + ' has disconnected\n');
         }
     });
@@ -106,14 +107,14 @@ function subscribe(socketIoServer, socket) {
         }
     });
     socket.on('uncoverRequest', index => {
-        let board = socket.game.board;
-        if (!board[index].covered || socket.game.currTurn != socket) return;
+        let game = socket.game;
+        if (!game || !game.board[index].covered || game.currTurn != socket) return;
 
         if (socket.prevIndex > -1) {
-            if (board[socket.prevIndex].val == board[index].val) {
-                socket.emit('success', index, board[index].val, true, socket.score);
-                socket.partner.emit('success', index, board[index].val, false, socket.partner.score);
-                board[index].covered = false;
+            if (game.board[socket.prevIndex].val == game.board[index].val) {
+                socket.emit('success', index, game.board[index].val, true, socket.score);
+                socket.partner.emit('success', index, game.board[index].val, false, socket.partner.score);
+                game.board[index].covered = false;
                 socket.score++;
 
                 if (!--socket.game.coveredPairsCount) {
@@ -123,18 +124,18 @@ function subscribe(socketIoServer, socket) {
                     socket.partner.emit('gameEnd', result);
                 }
             } else {
-                socket.emit('fail', socket.prevIndex, index, board[index].val, true);
-                socket.partner.emit('fail', socket.prevIndex, index, board[index].val, false);
-                board[index].covered = true;
-                board[socket.prevIndex].covered = true;
+                socket.emit('fail', socket.prevIndex, index, game.board[index].val, true);
+                socket.partner.emit('fail', socket.prevIndex, index, game.board[index].val, false);
+                game.board[index].covered = true;
+                game.board[socket.prevIndex].covered = true;
             }
             socket.game.currTurn = socket.partner;
             socket.prevIndex = -1;
         } else {
-            socket.emit('squareUncover', index, board[index].val);
-            socket.partner.emit('squareUncover', index, board[index].val);
+            socket.emit('squareUncover', index, game.board[index].val);
+            socket.partner.emit('squareUncover', index, game.board[index].val);
             socket.prevIndex = index;
-            board[index].covered = false;
+            game.board[index].covered = false;
         }
     });
 }
