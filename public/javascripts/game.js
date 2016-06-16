@@ -1,6 +1,12 @@
 'use strict'
 
 /**
+ * 
+ * @type {string}
+ */
+const SERVER = '188.166.30.133:3000'; 
+
+/**
  * Represents the levels of a game
  * @type {{HARD: number, MEDIUM: number, EASY: number}}
  */
@@ -26,7 +32,7 @@ function cover(jSquare) {
  */
 function uncover(jSquare, val, callback) {
     jSquare.one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', callback);
-    jSquare.find('div div.back div').html(val);
+    jSquare.find('div div.back div').html(`<img src="${SERVER}/static/images/${val}"/>`);
     jSquare.addClass('flip');
 }
 
@@ -40,7 +46,7 @@ class Player {
      * @param jBoard
      */
     constructor(name, jBoard) {
-        this.client = io('188.166.30.133:3000');
+        this.client = io(SERVER);
         this.opponentName = null;
         this.jBoard = jBoard;
         this.name = name;

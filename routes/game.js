@@ -57,8 +57,8 @@ class Game {
         this.coveredPairsCount = (rows * cols) / 2;
 
         for (let i = 0; i < (rows * cols) / 2; i++) {
-            this.board.push({val: i + 1, covered: true});
-            this.board.push({val: i + 1, covered: true});
+            this.board.push({val: i, covered: true});
+            this.board.push({val: i, covered: true});
         }
         shuffle(this.board);
 
