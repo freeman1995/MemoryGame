@@ -2,7 +2,7 @@
 
 const DIGITAL_OCEAN_HOST = '188.166.30.133';
 const LOCAL_HOST = 'localhost';
-const SERVER = `${DIGITAL_OCEAN_HOST}:3000`;
+const SERVER = `${LOCAL_HOST}:3000`;
 
 /**
  * Represents the levels of a game
@@ -68,12 +68,14 @@ class Player {
                 cover(secondSquare);
             })
         });
-        this.client.on('success', (index, val, mine) => {
+        this.client.on('success', (index, val, score) => {
             $('#messages-row').html('You succeed!, you gain another turn!');
+            $('#score').html(`My score: ${score}`);
             uncover($('.square').eq(index), val);
         });
-        this.client.on('opponentSuccess', (index, val, mine) => {
+        this.client.on('opponentSuccess', (index, val, score) => {
             $('#messages-row').html(`${this.opponentName} succeed!, he has another turn.`);
+            $('#opponent-score').html(`Opponent score: ${score}`);
             uncover($('.square').eq(index), val);
         });
         this.client.on('gameEnd', winner => {
@@ -104,7 +106,8 @@ class Player {
             this.opponentName = opponentName;
 
             // draw board
-            this.jBoard.html(`<tr><td id="messages-row" colspan="${cols}"></td></tr>`);
+            this.jBoard.html(`<tr><td id="messages-row" colspan="${cols}"></td></tr>
+                              <tr><td id="score" colspan="${cols/2}">My score: 0</td><td id="opponent-score" colspan="${cols/2}">Opponent score: 0</td></tr>`);
             for (let i = 0; i < rows; i++) {
                 let jTr = $('<tr></tr>>');
                 this.jBoard.append(jTr);
@@ -130,6 +133,6 @@ class Player {
 
             // Notify on first turn
             $('#messages-row').html(myTurn ? "You start." : `${opponentName} starts.`);
-        }).emit('findPartner', level);
+        }).emit('findOpponent', level);
     }
 }

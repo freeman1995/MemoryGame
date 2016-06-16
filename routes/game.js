@@ -94,7 +94,7 @@ function subscribe(socketIoServer, socket) {
             console.log('\n' + socket.name + ' has disconnected\n');
         }
     });
-    socket.on('findPartner', level => {
+    socket.on('findOpponent', level => {
         if (!socket.name) return;
 
         // if already in other lobby or in a game, leave it
@@ -103,6 +103,7 @@ function subscribe(socketIoServer, socket) {
         } else if (socket.game) {
             socket.opponent.emit('opponentLeft');
             socket.game = null;
+            socket.opponent.game = null;
         }
 
         // If lobby is not empty
@@ -134,10 +135,10 @@ function subscribe(socketIoServer, socket) {
 
         if (socket.prevIndex > -1) {
             if (game.board[socket.prevIndex].val == game.board[index].val) {
+                socket.score += 10;
                 socket.emit('success', index, game.board[index].val, socket.score);
-                socket.opponent.emit('opponentSuccess', index, game.board[index].val, socket.opponent.score);
+                socket.opponent.emit('opponentSuccess', index, game.board[index].val, socket.score);
                 game.board[index].covered = false;
-                socket.score++;
 
                 if (!--socket.game.coveredPairsCount) {
                     let result = socket.score == socket.opponent.score ?
