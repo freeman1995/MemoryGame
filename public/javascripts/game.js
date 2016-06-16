@@ -2,7 +2,7 @@
 
 const DIGITAL_OCEAN_HOST = '188.166.30.133';
 const LOCAL_HOST = 'localhost';
-const SERVER = `${LOCAL_HOST}:3000`;
+const SERVER = `${DIGITAL_OCEAN_HOST}:3000`;
 
 /**
  * Represents the levels of a game
