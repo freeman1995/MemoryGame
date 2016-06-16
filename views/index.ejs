@@ -48,6 +48,7 @@
         /* back, initially hidden pane */
         .back {
             transform: rotateY(180deg);
+            border-width: medium;
         }
     </style>
 </head>
@@ -64,6 +65,10 @@
 <br/>
 <br/>
 <table id="game-board"></table>
+<br/>
+<div id="chat"></div>
+<div id="chat-controls"></div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"
@@ -81,11 +86,18 @@
             if (player) {
                 player.disconnect();
             }
-            player = new Player($('#name').val(), $('#game-board'));
+            player = new Player($('#name').val(), $('#game-board'), $('#chat'));
             $('#current-user').html(`Logged as ${$('#name').val()}`);
             $('#container').html(`<label for="level">Level:&nbsp;&nbsp;</label><select id="level"></select>&nbsp;&nbsp;`);
             $('#container').append($(`<button type="button" id="play" class="btn btn-primary">Play!</button>`).on('click', function () {
-                player.play($('#level').val());
+                player.play($('#level').val(), function () {
+                    $('#chat-controls').html(`<input id="msg" type="text"/>&nbsp;&nbsp;
+                                              <button type="button" id="send" class="btn btn-primary">Send!</button>`);
+                    $('#send').on('click', function () {
+                        player.sendMsg($('#msg').val());
+                        $('#msg').val(null);
+                    });
+                });
                 $('#game-board').html('Waiting for opponent...');
             }));
             $.each(LEVELS, function (key, value) {

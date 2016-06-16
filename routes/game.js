@@ -1,15 +1,6 @@
 'use strict'
 
 /**
- *
- * @param server
- * @param room
- */
-function popClient(server, room) {
-    return server.sockets.adapter.nsp.connected[Object.keys(room.sockets)[0]];
-}
-
-/**
  * Shuffles the elements of an array
  * @param arr - the array
  */
@@ -136,8 +127,8 @@ function subscribe(socketIoServer, socket) {
         if (socket.prevIndex > -1) {
             if (game.board[socket.prevIndex].val == game.board[index].val) {
                 socket.score += 10;
-                socket.emit('success', index, game.board[index].val, socket.score);
-                socket.opponent.emit('opponentSuccess', index, game.board[index].val, socket.score);
+                socket.emit('success', socket.prevIndex, index, game.board[index].val, socket.score);
+                socket.opponent.emit('opponentSuccess', socket.prevIndex, index, game.board[index].val, socket.score);
                 game.board[index].covered = false;
 
                 if (!--socket.game.coveredPairsCount) {
@@ -159,6 +150,11 @@ function subscribe(socketIoServer, socket) {
             socket.opponent.emit('squareUncover', index, game.board[index].val);
             socket.prevIndex = index;
             game.board[index].covered = false;
+        }
+    });
+    socket.on('msg', msg => {
+        if (socket.game) {
+            socket.opponent.emit('msg', msg);
         }
     });
 }

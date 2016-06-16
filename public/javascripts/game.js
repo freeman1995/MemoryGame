@@ -2,7 +2,7 @@
 
 const DIGITAL_OCEAN_HOST = '188.166.30.133';
 const LOCAL_HOST = 'localhost';
-const SERVER = `${DIGITAL_OCEAN_HOST}:3000`;
+const SERVER = `${LOCAL_HOST}:3000`;
 
 /**
  * Represents the levels of a game
@@ -43,12 +43,13 @@ class Player {
      * @param name
      * @param jBoard
      */
-    constructor(name, jBoard) {
+    constructor(name, jBoard, jChat) {
         this.client = io(SERVER);
         this.opponentName = null;
         this.jBoard = jBoard;
+        this.jChat = jChat;
         this.name = name;
-
+            
         this.client.on('squareUncover', (index, val) => uncover($('.square').eq(index), val));
         this.client.on('fail', (uncoveredIndex, coveredIndex, coveredVal) => {
             let firstSquare = $('.square').eq(uncoveredIndex);
@@ -68,14 +69,18 @@ class Player {
                 cover(secondSquare);
             })
         });
-        this.client.on('success', (index, val, score) => {
+        this.client.on('success', (uncoveredIndex, index, val, score) => {
             $('#messages-row').html('You succeed!, you gain another turn!');
             $('#score').html(`My score: ${score}`);
+            $('.square').eq(index).find('div div.back div').css('border-color', 'green');
+            $('.square').eq(uncoveredIndex).find('div div.back div').css('border-color', 'green');
             uncover($('.square').eq(index), val);
         });
-        this.client.on('opponentSuccess', (index, val, score) => {
+        this.client.on('opponentSuccess', (uncoveredIndex, index, val, score) => {
             $('#messages-row').html(`${this.opponentName} succeed!, he has another turn.`);
             $('#opponent-score').html(`Opponent score: ${score}`);
+            $('.square').eq(index).find('div div.back div').css('border-color', 'red');
+            $('.square').eq(uncoveredIndex).find('div div.back div').css('border-color', 'red');
             uncover($('.square').eq(index), val);
         });
         this.client.on('gameEnd', winner => {
@@ -88,6 +93,7 @@ class Player {
         this.client.on('opponentLeft', () => {
             $('#messages-row').html(`${this.opponentName} has left, what a loser...`);
         });
+        this.client.on('msg', msg => this.jChat.append(`<div align="right">${msg}</div>`));
         this.client.once('logged', id => this.client.id = id).emit('login', name);
     }
 
@@ -99,9 +105,18 @@ class Player {
     }
 
     /**
+     * 
+     * @param msg
+     */
+    sendMsg(msg) {
+        this.jChat.append(`<div align="left">${msg}</div>`);
+        this.client.emit('msg', msg);
+    }
+    
+    /**
      * Starts new game
      */
-    play(level) {
+    play(level, callback) {
         this.client.once('gameStart', (rows, cols, myTurn, opponentName) => {
             this.opponentName = opponentName;
 
@@ -131,8 +146,9 @@ class Player {
                 }
             }
 
-            // Notify on first turn
+            // Notify on first turn and execute callback
             $('#messages-row').html(myTurn ? "You start." : `${opponentName} starts.`);
+            callback();
         }).emit('findOpponent', level);
     }
 }
