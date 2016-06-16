@@ -78,8 +78,10 @@ function subscribe(socketIoServer, socket) {
         console.log('\n' + socket.name + ' has connected\n');
     });
     socket.on('disconnect', () => {
-        if (socket.name)
+        if (socket.name) {
+            socket.partner.emit('opponentLeft');
             console.log('\n' + socket.name + ' has disconnected\n');
+        }
     });
     socket.on('findPartner', level => {
         if (!socket.name) return;

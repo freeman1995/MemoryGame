@@ -66,6 +66,9 @@ class Player {
                 $('#messages-row').html(winner == this.client.id ? 'You won!!!' : 'You lost!');
             }
         });
+        this.client.on('opponentLeft', () => {
+            $('#messages-row').html(`${this.opponentName} has left, what a loser...`);
+        });
         this.client.once('logged', id => this.client.id = id).emit('login', name);
     }
 
