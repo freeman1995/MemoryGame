@@ -11,7 +11,7 @@ const LEVELS = {
 };
 
 /**
- * 
+ *
  * @param jSquare
  */
 function cover(jSquare) {
@@ -35,19 +35,17 @@ function uncover(jSquare, val, callback) {
  */
 class Player {
     /**
-     * 
+     *
      * @param name
      * @param jBoard
      */
     constructor(name, jBoard) {
-        this.client = io('188.166.30.133:3000');
+        this.client = io('localhost:3000');
         this.opponentName = null;
         this.jBoard = jBoard;
         this.name = name;
-        
-        this.client.on('squareUncover', (index, val) => {
-            uncover($('.square').eq(index), val);
-        });
+
+        this.client.on('squareUncover', (index, val) => uncover($('.square').eq(index), val));
         this.client.on('fail', (uncoveredIndex, coveredIndex, coveredVal, mine) => {
             let firstSquare = $('.square').eq(uncoveredIndex);
             let secondSquare = $('.square').eq(coveredIndex);
@@ -57,7 +55,7 @@ class Player {
                 cover(secondSquare);
             })
         });
-        this.client.on('match', (index, val, mine) => {
+        this.client.on('success', (index, val, mine) => {
             $('#messages-row').html(mine ? `You succeed!, not it's your ${this.opponentName} turn.` : `${this.opponentName} succeed!, now it's your turn.`);
             uncover($('.square').eq(index), val);
         });
@@ -68,10 +66,12 @@ class Player {
                 $('#messages-row').html(winner == this.client.id ? 'You won!!!' : 'You lost!');
             }
         });
-        
-        this.client.emit('login', name);
+        this.client.once('logged', id => this.client.id = id).emit('login', name);
     }
 
+    /**
+     *
+     */
     disconnect() {
         this.client.disconnect();
     }
@@ -84,33 +84,29 @@ class Player {
             this.opponentName = opponentName;
 
             // draw board
-            let boardContent = `<tr><td id="messages-row" colspan="${cols}"></td></tr>`;
+            this.jBoard.html(`<tr><td id="messages-row" colspan="${cols}"></td></tr>`);
             for (let i = 0; i < rows; i++) {
-                boardContent += '<tr>';
+                let jTr = $('<tr></tr>>');
+                this.jBoard.append(jTr);
                 for (let j = 0; j < cols; j++) {
-                    boardContent += `<td style="padding: 3px;">
-                                        <div data-index=${(i * cols) + j} class="square">
-                                            <div class="flipper">
-                                                <div class="front">
-                                                    <div class="card" style="background: silver"></div>
-                                                </div>
-                                                <div class="back">
-                                                    <div class="card" style="background: green"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                     </td>`;
+                    let jTd = $('<td style="padding: 3px;"></td>');
+                    jTr.append(jTd);
+                    let square = $(`<div data-index=${(i * cols) + j} class="square">
+                                      <div class="flipper">
+                                          <div class="front">
+                                              <div class="card" style="background: silver"></div>
+                                          </div>
+                                          <div class="back">
+                                              <div class="card" style="background: green"></div>
+                                          </div>
+                                      </div>
+                                  </div>`);
+                    square.on('click', () => {
+                        this.client.emit('uncoverRequest', square.data('index'))
+                    });
+                    jTd.append(square);
                 }
-                boardContent += '</tr>';
             }
-            this.jBoard.html(boardContent);
-            
-            // handle board square clicks
-            let thisRef = this;
-            $('.square').click(function () {
-                let jSquare = $(this);
-                thisRef.client.emit('uncoverRequest', jSquare.data('index'));
-            });
 
             // Notify on first turn
             $('#messages-row').html(myTurn ? "You start." : `${opponentName} starts.`);

@@ -57,11 +57,10 @@
 <br/>
 <br/>
 <h4 id="current-user"></h4>
-<label for="name">Enter your name asshole:&nbsp;&nbsp;</label><input id="name" type="text"/>
-<button type="button" id="login" class="btn btn-primary">Login!</button>
-<br/>
-<label for="level">Level:&nbsp;&nbsp;</label><select id="level"></select>
-<button type="button" id="play" class="btn btn-primary">Play!</button>
+<div id="container">
+    <label for="name">Enter your name asshole:&nbsp;&nbsp;</label><input id="name" type="text"/>&nbsp;&nbsp;
+    <button type="button" id="login" class="btn btn-primary">Login!</button>
+</div>
 <table id="game-board"></table>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -76,20 +75,20 @@
     let player;
 
     $(function () {
-        $.each(LEVELS, function (key, value) {
-            $('#level').append($('<option></option>').attr("value", value).text(key));
-        });
         $('#login').on('click', function () {
             if (player) {
                 player.disconnect();
             }
             player = new Player($('#name').val(), $('#game-board'));
             $('#current-user').html(`Logged as ${$('#name').val()}`);
-            $('#game-board').html(null);
-        });
-        $('#play').on('click', function () {
-            player.play($('#level').val());
-            $('#game-board').html('Waiting for opponent...');
+            $('#container').html(`<label for="level">Level:&nbsp;&nbsp;</label><select id="level"></select>&nbsp;&nbsp;`);
+            $('#container').append($(`<button type="button" id="play" class="btn btn-primary">Play!</button>`).on('click', function () {
+                player.play($('#level').val());
+                $('#game-board').html('Waiting for opponent...');
+            }));
+            $.each(LEVELS, function (key, value) {
+                $('#level').append($('<option></option>').attr("value", value).text(key));
+            });
         });
     });
 </script>

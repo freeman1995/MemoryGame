@@ -6,8 +6,7 @@
  * @param room
  */
 function popClient(server, room) {
-    let key = Object.keys(room.sockets)[0];
-    return server.sockets.adapter.nsp.connected[key];
+    return server.sockets.adapter.nsp.connected[Object.keys(room.sockets)[0]];
 }
 
 /**
@@ -62,6 +61,8 @@ class Game {
             this.board.push({val: i + 1, covered: true});
         }
         shuffle(this.board);
+
+        console.log(this.board);
     }
 }
 
@@ -69,70 +70,70 @@ class Game {
  *
  * @param socketIoServer
  */
-function subscribe(socketIoServer) {
+function subscribe(socketIoServer, socket) {
     const rooms = socketIoServer.sockets.adapter.rooms;
-    socketIoServer.on('connection', socket => {
-        socket.on('login', name => {
-            socket.name = name;
-            console.log('\n' + socket.name + ' has connected\n');
-        })
-        socket.on('disconnect', () => {
-            if (socket.name)
-                console.log('\n' + socket.name + ' has disconnected\n');
-        });
-        socket.on('findPartner', level => {
-            socket.join(level);
-            if (rooms[level].length > 1) {
-                socket.leave(level);
-                let boardSize = BOARD_SIZES[level];
-                let game = new Game(boardSize.rows, boardSize.cols);
-                let socket2 = popClient(socketIoServer, rooms[level]);
-                socket2.leave(level);
+    socket.on('login', name => {
+        socket.name = name;
+        socket.emit('logged', socket.id);
+        console.log('\n' + socket.name + ' has connected\n');
+    });
+    socket.on('disconnect', () => {
+        if (socket.name)
+            console.log('\n' + socket.name + ' has disconnected\n');
+    });
+    socket.on('findPartner', level => {
+        if (!socket.name) return;
 
-                game.currTurn = socket2;
-                socket.partner = socket2;
-                socket.game = game;
-                socket.score = 0;
-                socket2.partner = socket;
-                socket2.game = game;
-                socket2.score = 0;
+        socket.join(level);
+        if (rooms[level].length > 1) {
+            socket.leave(level);
+            let socket2 = popClient(socketIoServer, rooms[level]);
+            socket2.leave(level);
 
-                socket.emit('gameStart', boardSize.rows, boardSize.cols, false, socket2.name);
-                socket2.emit('gameStart', boardSize.rows, boardSize.cols, true, socket.name);
-            }
-        });
-        socket.on('uncoverRequest', index => {
-            let board = socket.game.board;
-            if (board[index].covered && socket.game.currTurn == socket) {
-                if (socket.prevIndex > -1) {
-                    if (board[socket.prevIndex].val == board[index].val) {
-                        socket.emit('match', index, board[index].val, true);
-                        socket.partner.emit('match', index, board[index].val, false);
-                        board[index].covered = false;
-                        socket.score++;
-                        
-                        if (!--socket.game.coveredPairsCount) {
-                            let result = socket.score != socket.partner.score ? 
-                                -1 : socket.score > socket.partner.score ? socket.id : socket.partner.id;
-                            socket.emit('gameEnd', result);
-                            socket.partner.emit('gameEnd', result);
-                        }
-                    } else {
-                        socket.emit('fail', socket.prevIndex, index, board[index].val, true);
-                        socket.partner.emit('fail', socket.prevIndex, index, board[index].val, false);
-                        board[index].covered = true;
-                        board[socket.prevIndex].covered = true;
-                    }
-                    socket.game.currTurn = socket.partner;
-                    socket.prevIndex = -1;
-                } else {
-                    socket.emit('squareUncover', index, board[index].val);
-                    socket.partner.emit('squareUncover', index, board[index].val);
-                    socket.prevIndex = index;
-                    board[index].covered = false;
+            let game = new Game(BOARD_SIZES[level].rows, BOARD_SIZES[level].cols);
+            game.currTurn = socket2;
+            socket.partner = socket2;
+            socket.game = game;
+            socket.score = 0;
+            socket2.partner = socket;
+            socket2.game = game;
+            socket2.score = 0;
+
+            socket.emit('gameStart', BOARD_SIZES[level].rows, BOARD_SIZES[level].cols, false, socket2.name);
+            socket2.emit('gameStart', BOARD_SIZES[level].rows, BOARD_SIZES[level].cols, true, socket.name);
+        }
+    });
+    socket.on('uncoverRequest', index => {
+        let board = socket.game.board;
+        if (!board[index].covered || socket.game.currTurn != socket) return;
+
+        if (socket.prevIndex > -1) {
+            if (board[socket.prevIndex].val == board[index].val) {
+                socket.emit('success', index, board[index].val, true, socket.score);
+                socket.partner.emit('success', index, board[index].val, false, socket.partner.score);
+                board[index].covered = false;
+                socket.score++;
+
+                if (!--socket.game.coveredPairsCount) {
+                    let result = socket.score == socket.partner.score ?
+                        -1 : socket.score > socket.partner.score ? socket.id : socket.partner.id;
+                    socket.emit('gameEnd', result);
+                    socket.partner.emit('gameEnd', result);
                 }
+            } else {
+                socket.emit('fail', socket.prevIndex, index, board[index].val, true);
+                socket.partner.emit('fail', socket.prevIndex, index, board[index].val, false);
+                board[index].covered = true;
+                board[socket.prevIndex].covered = true;
             }
-        })
+            socket.game.currTurn = socket.partner;
+            socket.prevIndex = -1;
+        } else {
+            socket.emit('squareUncover', index, board[index].val);
+            socket.partner.emit('squareUncover', index, board[index].val);
+            socket.prevIndex = index;
+            board[index].covered = false;
+        }
     });
 }
 

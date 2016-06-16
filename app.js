@@ -19,7 +19,7 @@ var httpServer = http.Server(app);
 var socketIoServer = socketio(httpServer);
 
 // Subscribe on client events
-game(socketIoServer);
+socketIoServer.on('connection', socket => game(socketIoServer, socket));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
