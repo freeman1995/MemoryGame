@@ -50,17 +50,30 @@ class Player {
         this.name = name;
 
         this.client.on('squareUncover', (index, val) => uncover($('.square').eq(index), val));
-        this.client.on('fail', (uncoveredIndex, coveredIndex, coveredVal, mine) => {
+        this.client.on('fail', (uncoveredIndex, coveredIndex, coveredVal) => {
             let firstSquare = $('.square').eq(uncoveredIndex);
             let secondSquare = $('.square').eq(coveredIndex);
             uncover(secondSquare, coveredVal, () => {
-                $('#messages-row').html(mine ? `You failed!, now it's ${this.opponentName} turn.` : `${this.opponentName} failed, now it's your turn.`);
+                $('#messages-row').html(`You failed!, now it's ${this.opponentName} turn.`);
+                cover(firstSquare);
+                cover(secondSquare);
+            })
+        });
+        this.client.on('opponentFail', (uncoveredIndex, coveredIndex, coveredVal) => {
+            let firstSquare = $('.square').eq(uncoveredIndex);
+            let secondSquare = $('.square').eq(coveredIndex);
+            uncover(secondSquare, coveredVal, () => {
+                $('#messages-row').html(`${this.opponentName} failed, now it's your turn.`);
                 cover(firstSquare);
                 cover(secondSquare);
             })
         });
         this.client.on('success', (index, val, mine) => {
-            $('#messages-row').html(mine ? 'You succeed!, you gain another turn!' : `${this.opponentName} succeed!, he has another turn.`);
+            $('#messages-row').html('You succeed!, you gain another turn!');
+            uncover($('.square').eq(index), val);
+        });
+        this.client.on('opponentSuccess', (index, val, mine) => {
+            $('#messages-row').html(`${this.opponentName} succeed!, he has another turn.`);
             uncover($('.square').eq(index), val);
         });
         this.client.on('gameEnd', winner => {

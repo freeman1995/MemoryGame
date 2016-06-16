@@ -84,9 +84,9 @@ function subscribe(socketIoServer, socket) {
     });
     socket.on('disconnect', () => {
         if (socket.name) {
-            if (socket.partner) {
-                socket.partner.emit('opponentLeft');
-                socket.partner.game = null;
+            if (socket.opponent) {
+                socket.opponent.emit('opponentLeft');
+                socket.opponent.game = null;
             }
             if (socket.lobbyId) {
                 lobbies[socket.lobbyId] = null;
@@ -101,7 +101,7 @@ function subscribe(socketIoServer, socket) {
         if (socket.lobbyId != null) {
             lobbies[socket.lobbyId] = null;
         } else if (socket.game) {
-            socket.partner.emit('opponentLeft');
+            socket.opponent.emit('opponentLeft');
             socket.game = null;
         }
 
@@ -113,10 +113,10 @@ function subscribe(socketIoServer, socket) {
 
             let game = new Game(BOARD_SIZES[level].rows, BOARD_SIZES[level].cols);
             game.currTurn = socket2;
-            socket.partner = socket2;
+            socket.opponent = socket2;
             socket.game = game;
             socket.score = 0;
-            socket2.partner = socket;
+            socket2.opponent = socket;
             socket2.game = game;
             socket2.score = 0;
 
@@ -134,28 +134,28 @@ function subscribe(socketIoServer, socket) {
 
         if (socket.prevIndex > -1) {
             if (game.board[socket.prevIndex].val == game.board[index].val) {
-                socket.emit('success', index, game.board[index].val, true, socket.score);
-                socket.partner.emit('success', index, game.board[index].val, false, socket.partner.score);
+                socket.emit('success', index, game.board[index].val, socket.score);
+                socket.opponent.emit('opponentSuccess', index, game.board[index].val, socket.opponent.score);
                 game.board[index].covered = false;
                 socket.score++;
 
                 if (!--socket.game.coveredPairsCount) {
-                    let result = socket.score == socket.partner.score ?
-                        -1 : socket.score > socket.partner.score ? socket.id : socket.partner.id;
+                    let result = socket.score == socket.opponent.score ?
+                        -1 : socket.score > socket.opponent.score ? socket.id : socket.opponent.id;
                     socket.emit('gameEnd', result);
-                    socket.partner.emit('gameEnd', result);
+                    socket.opponent.emit('gameEnd', result);
                 }
             } else {
-                socket.emit('fail', socket.prevIndex, index, game.board[index].val, true);
-                socket.partner.emit('fail', socket.prevIndex, index, game.board[index].val, false);
+                socket.emit('fail', socket.prevIndex, index, game.board[index].val);
+                socket.opponent.emit('opponentFail', socket.prevIndex, index, game.board[index].val);
                 game.board[index].covered = true;
                 game.board[socket.prevIndex].covered = true;
-                socket.game.currTurn = socket.partner;
+                socket.game.currTurn = socket.opponent;
             }
             socket.prevIndex = -1;
         } else {
             socket.emit('squareUncover', index, game.board[index].val);
-            socket.partner.emit('squareUncover', index, game.board[index].val);
+            socket.opponent.emit('squareUncover', index, game.board[index].val);
             socket.prevIndex = index;
             game.board[index].covered = false;
         }
