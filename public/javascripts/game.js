@@ -59,7 +59,7 @@ class Player {
             })
         });
         this.client.on('success', (index, val, mine) => {
-            $('#messages-row').html(mine ? `You succeed!, not it's your ${this.opponentName} turn.` : `${this.opponentName} succeed!, now it's your turn.`);
+            $('#messages-row').html(mine ? 'You succeed!, you gain another turn!' : `${this.opponentName} succeed!, he has another turn.`);
             uncover($('.square').eq(index), val);
         });
         this.client.on('gameEnd', winner => {
