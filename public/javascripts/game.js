@@ -29,7 +29,7 @@ function cover(jSquare) {
  */
 function uncover(jSquare, val, callback) {
     jSquare.one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', callback);
-    jSquare.find('div div.back div').html(`<img src="${SERVER}/images/${val}.png"/>`);
+    jSquare.find('div div.back div').html(`<img src="http://${SERVER}/images/${val}.png"/>`);
     jSquare.addClass('flip');
 }
 
