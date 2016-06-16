@@ -1,10 +1,7 @@
 'use strict'
 
-/**
- * 
- * @type {string}
- */
-const SERVER = '188.166.30.133:3000'; 
+const DIGITAL_OCEAN_HOST = '188.166.30.133';
+const SERVER = `${DIGITAL_OCEAN_HOST}:3000`;
 
 /**
  * Represents the levels of a game
@@ -32,7 +29,7 @@ function cover(jSquare) {
  */
 function uncover(jSquare, val, callback) {
     jSquare.one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', callback);
-    jSquare.find('div div.back div').html(`<img src="${SERVER}/static/images/${val}"/>`);
+    jSquare.find('div div.back div').html(`<img src="${SERVER}/images/${val}.png"/>`);
     jSquare.addClass('flip');
 }
 
