@@ -40,7 +40,7 @@ class Player {
      * @param jBoard
      */
     constructor(name, jBoard) {
-        this.client = io('localhost:3000');
+        this.client = io('188.166.30.133:3000');
         this.opponentName = null;
         this.jBoard = jBoard;
         this.name = name;

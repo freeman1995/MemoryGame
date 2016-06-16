@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="614d8f8d-8d6c-40cd-a33c-2438aaca686e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/game.js" afterPath="$PROJECT_DIR$/public/javascripts/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/game.js" afterPath="$PROJECT_DIR$/routes/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
     </list>
     <ignored path="MemoryGame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="62" column="28" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
+            <state relative-caret-position="38">
+              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc;n#popClient#0" expanded="false" />
                 <element signature="n#!!block;n#popClient#0" expanded="false" />
@@ -51,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
+            <state relative-caret-position="77">
+              <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="40" />
               <folding>
                 <element signature="e#14#112#0" expanded="false" />
                 <element signature="e#128#172#0" expanded="false" />
@@ -65,22 +62,22 @@
                 <element signature="n#!!block;n#uncover#0" expanded="false" />
                 <element signature="n#!!doc;n#Player#0" expanded="false" />
                 <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
-                <element signature="e#1033#1464#0" expanded="false" />
-                <element signature="e#1788#2019#0" expanded="false" />
+                <element signature="e#1038#1469#0" expanded="false" />
+                <element signature="e#1793#2024#0" expanded="false" />
                 <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
                 <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
                 <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
-                <element signature="e#2534#3648#0" expanded="false" />
-                <element signature="e#3470#3574#0" expanded="false" />
-                <marker date="1466038353117" expanded="true" signature="2713:2726" ph="..." />
-                <marker date="1466038353117" expanded="true" signature="2727:2735" ph="..." />
-                <marker date="1466038353117" expanded="true" signature="2727:3616" ph="..." />
-                <marker date="1466038353117" expanded="false" signature="2858:3420" ph="..." />
-                <marker date="1466038353117" expanded="true" signature="2918:3379" ph="..." />
-                <marker date="1466038353117" expanded="true" signature="2980:3127" ph="..." />
-                <marker date="1466038353117" expanded="true" signature="3053:3071" ph="..." />
-                <marker date="1466038353117" expanded="true" signature="3188:3334" ph="..." />
-                <marker date="1466038353117" expanded="true" signature="3261:3278" ph="..." />
+                <element signature="e#2539#3653#0" expanded="false" />
+                <element signature="e#3475#3579#0" expanded="false" />
+                <marker date="1466041621342" expanded="true" signature="2718:2731" ph="..." />
+                <marker date="1466041621342" expanded="true" signature="2732:2740" ph="..." />
+                <marker date="1466041621342" expanded="true" signature="2732:3621" ph="..." />
+                <marker date="1466041621342" expanded="false" signature="2863:3425" ph="..." />
+                <marker date="1466041621342" expanded="true" signature="2923:3384" ph="..." />
+                <marker date="1466041621342" expanded="true" signature="2985:3132" ph="..." />
+                <marker date="1466041621342" expanded="true" signature="3058:3076" ph="..." />
+                <marker date="1466041621342" expanded="true" signature="3193:3339" ph="..." />
+                <marker date="1466041621342" expanded="true" signature="3266:3283" ph="..." />
               </folding>
             </state>
           </provider>
@@ -126,8 +123,8 @@
         <option value="internal/process/next_tick.js" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/game.js" />
         <option value="$PROJECT_DIR$/routes/game.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/game.js" />
       </list>
     </option>
   </component>
@@ -144,10 +141,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-691" />
-    <option name="y" value="-1088" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="y" value="40" />
+    <option name="width" value="1366" />
+    <option name="height" value="728" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -523,7 +519,7 @@
     <option name="totallyTimeSpent" value="47002000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-691" y="-1088" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="40" width="1366" height="728" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17567568" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
@@ -535,7 +531,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5079909" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21004567" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33576643" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.66780823" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -628,22 +624,22 @@
             <element signature="n#!!block;n#uncover#0" expanded="false" />
             <element signature="n#!!doc;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
-            <element signature="e#1033#1464#0" expanded="false" />
-            <element signature="e#1788#2019#0" expanded="false" />
+            <element signature="e#1038#1469#0" expanded="false" />
+            <element signature="e#1793#2024#0" expanded="false" />
             <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
-            <element signature="e#2534#3648#0" expanded="false" />
-            <element signature="e#3470#3574#0" expanded="false" />
-            <marker date="1466038353117" expanded="true" signature="2713:2726" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:2735" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:3616" ph="..." />
-            <marker date="1466038353117" expanded="false" signature="2858:3420" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2918:3379" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2980:3127" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3053:3071" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3188:3334" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3261:3278" ph="..." />
+            <element signature="e#2539#3653#0" expanded="false" />
+            <element signature="e#3475#3579#0" expanded="false" />
+            <marker date="1466041621342" expanded="true" signature="2718:2731" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:2740" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:3621" ph="..." />
+            <marker date="1466041621342" expanded="false" signature="2863:3425" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2923:3384" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2985:3132" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3058:3076" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3193:3339" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3266:3283" ph="..." />
           </folding>
         </state>
       </provider>
@@ -704,22 +700,22 @@
             <element signature="n#!!block;n#uncover#0" expanded="false" />
             <element signature="n#!!doc;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
-            <element signature="e#1033#1464#0" expanded="false" />
-            <element signature="e#1788#2019#0" expanded="false" />
+            <element signature="e#1038#1469#0" expanded="false" />
+            <element signature="e#1793#2024#0" expanded="false" />
             <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
-            <element signature="e#2534#3648#0" expanded="false" />
-            <element signature="e#3470#3574#0" expanded="false" />
-            <marker date="1466038353117" expanded="true" signature="2713:2726" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:2735" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:3616" ph="..." />
-            <marker date="1466038353117" expanded="false" signature="2858:3420" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2918:3379" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2980:3127" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3053:3071" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3188:3334" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3261:3278" ph="..." />
+            <element signature="e#2539#3653#0" expanded="false" />
+            <element signature="e#3475#3579#0" expanded="false" />
+            <marker date="1466041621342" expanded="true" signature="2718:2731" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:2740" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:3621" ph="..." />
+            <marker date="1466041621342" expanded="false" signature="2863:3425" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2923:3384" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2985:3132" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3058:3076" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3193:3339" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3266:3283" ph="..." />
           </folding>
         </state>
       </provider>
@@ -779,22 +775,22 @@
             <element signature="n#!!block;n#uncover#0" expanded="false" />
             <element signature="n#!!doc;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
-            <element signature="e#1033#1464#0" expanded="false" />
-            <element signature="e#1788#2019#0" expanded="false" />
+            <element signature="e#1038#1469#0" expanded="false" />
+            <element signature="e#1793#2024#0" expanded="false" />
             <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
-            <element signature="e#2534#3648#0" expanded="false" />
-            <element signature="e#3470#3574#0" expanded="false" />
-            <marker date="1466038353117" expanded="true" signature="2713:2726" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:2735" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:3616" ph="..." />
-            <marker date="1466038353117" expanded="false" signature="2858:3420" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2918:3379" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2980:3127" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3053:3071" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3188:3334" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3261:3278" ph="..." />
+            <element signature="e#2539#3653#0" expanded="false" />
+            <element signature="e#3475#3579#0" expanded="false" />
+            <marker date="1466041621342" expanded="true" signature="2718:2731" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:2740" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:3621" ph="..." />
+            <marker date="1466041621342" expanded="false" signature="2863:3425" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2923:3384" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2985:3132" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3058:3076" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3193:3339" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3266:3283" ph="..." />
           </folding>
         </state>
       </provider>
@@ -854,22 +850,22 @@
             <element signature="n#!!block;n#uncover#0" expanded="false" />
             <element signature="n#!!doc;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
-            <element signature="e#1033#1464#0" expanded="false" />
-            <element signature="e#1788#2019#0" expanded="false" />
+            <element signature="e#1038#1469#0" expanded="false" />
+            <element signature="e#1793#2024#0" expanded="false" />
             <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
-            <element signature="e#2534#3648#0" expanded="false" />
-            <element signature="e#3470#3574#0" expanded="false" />
-            <marker date="1466038353117" expanded="true" signature="2713:2726" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:2735" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:3616" ph="..." />
-            <marker date="1466038353117" expanded="false" signature="2858:3420" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2918:3379" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2980:3127" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3053:3071" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3188:3334" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3261:3278" ph="..." />
+            <element signature="e#2539#3653#0" expanded="false" />
+            <element signature="e#3475#3579#0" expanded="false" />
+            <marker date="1466041621342" expanded="true" signature="2718:2731" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:2740" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:3621" ph="..." />
+            <marker date="1466041621342" expanded="false" signature="2863:3425" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2923:3384" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2985:3132" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3058:3076" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3193:3339" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3266:3283" ph="..." />
           </folding>
         </state>
       </provider>
@@ -908,22 +904,22 @@
             <element signature="n#!!block;n#uncover#0" expanded="false" />
             <element signature="n#!!doc;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
-            <element signature="e#1033#1464#0" expanded="false" />
-            <element signature="e#1788#2019#0" expanded="false" />
+            <element signature="e#1038#1469#0" expanded="false" />
+            <element signature="e#1793#2024#0" expanded="false" />
             <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
-            <element signature="e#2534#3648#0" expanded="false" />
-            <element signature="e#3470#3574#0" expanded="false" />
-            <marker date="1466038353117" expanded="true" signature="2713:2726" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:2735" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:3616" ph="..." />
-            <marker date="1466038353117" expanded="false" signature="2858:3420" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2918:3379" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2980:3127" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3053:3071" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3188:3334" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3261:3278" ph="..." />
+            <element signature="e#2539#3653#0" expanded="false" />
+            <element signature="e#3475#3579#0" expanded="false" />
+            <marker date="1466041621342" expanded="true" signature="2718:2731" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:2740" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:3621" ph="..." />
+            <marker date="1466041621342" expanded="false" signature="2863:3425" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2923:3384" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2985:3132" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3058:3076" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3193:3339" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3266:3283" ph="..." />
           </folding>
         </state>
       </provider>
@@ -962,22 +958,22 @@
             <element signature="n#!!block;n#uncover#0" expanded="false" />
             <element signature="n#!!doc;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
-            <element signature="e#1033#1464#0" expanded="false" />
-            <element signature="e#1788#2019#0" expanded="false" />
+            <element signature="e#1038#1469#0" expanded="false" />
+            <element signature="e#1793#2024#0" expanded="false" />
             <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
-            <element signature="e#2534#3648#0" expanded="false" />
-            <element signature="e#3470#3574#0" expanded="false" />
-            <marker date="1466038353117" expanded="true" signature="2713:2726" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:2735" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:3616" ph="..." />
-            <marker date="1466038353117" expanded="false" signature="2858:3420" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2918:3379" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2980:3127" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3053:3071" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3188:3334" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3261:3278" ph="..." />
+            <element signature="e#2539#3653#0" expanded="false" />
+            <element signature="e#3475#3579#0" expanded="false" />
+            <marker date="1466041621342" expanded="true" signature="2718:2731" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:2740" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:3621" ph="..." />
+            <marker date="1466041621342" expanded="false" signature="2863:3425" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2923:3384" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2985:3132" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3058:3076" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3193:3339" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3266:3283" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1016,22 +1012,22 @@
             <element signature="n#!!block;n#uncover#0" expanded="false" />
             <element signature="n#!!doc;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
-            <element signature="e#1033#1464#0" expanded="false" />
-            <element signature="e#1788#2019#0" expanded="false" />
+            <element signature="e#1038#1469#0" expanded="false" />
+            <element signature="e#1793#2024#0" expanded="false" />
             <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
             <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
-            <element signature="e#2534#3648#0" expanded="false" />
-            <element signature="e#3470#3574#0" expanded="false" />
-            <marker date="1466038353117" expanded="true" signature="2713:2726" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:2735" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:3616" ph="..." />
-            <marker date="1466038353117" expanded="false" signature="2858:3420" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2918:3379" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2980:3127" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3053:3071" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3188:3334" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3261:3278" ph="..." />
+            <element signature="e#2539#3653#0" expanded="false" />
+            <element signature="e#3475#3579#0" expanded="false" />
+            <marker date="1466041621342" expanded="true" signature="2718:2731" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:2740" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:3621" ph="..." />
+            <marker date="1466041621342" expanded="false" signature="2863:3425" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2923:3384" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2985:3132" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3058:3076" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3193:3339" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3266:3283" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1196,43 +1192,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
-          <folding>
-            <element signature="e#14#112#0" expanded="false" />
-            <element signature="e#128#172#0" expanded="false" />
-            <element signature="n#!!doc;n#cover#0" expanded="false" />
-            <element signature="n#!!block;n#cover#0" expanded="false" />
-            <element signature="n#!!doc;n#uncover#0" expanded="false" />
-            <element signature="n#!!block;n#uncover#0" expanded="false" />
-            <element signature="n#!!doc;n#Player#0" expanded="false" />
-            <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
-            <element signature="e#1033#1464#0" expanded="false" />
-            <element signature="e#1788#2019#0" expanded="false" />
-            <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
-            <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
-            <element signature="e#2534#3648#0" expanded="false" />
-            <element signature="e#3470#3574#0" expanded="false" />
-            <marker date="1466038353117" expanded="true" signature="2713:2726" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:2735" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2727:3616" ph="..." />
-            <marker date="1466038353117" expanded="false" signature="2858:3420" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2918:3379" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="2980:3127" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3053:3071" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3188:3334" ph="..." />
-            <marker date="1466038353117" expanded="true" signature="3261:3278" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="62" column="28" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
+        <state relative-caret-position="38">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc;n#popClient#0" expanded="false" />
             <element signature="n#!!block;n#popClient#0" expanded="false" />
@@ -1246,6 +1209,39 @@
             <element signature="n#!!doc;n#subscribe#0" expanded="false" />
             <element signature="e#1438#1577#0" expanded="false" />
             <element signature="e#1614#1715#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="40" />
+          <folding>
+            <element signature="e#14#112#0" expanded="false" />
+            <element signature="e#128#172#0" expanded="false" />
+            <element signature="n#!!doc;n#cover#0" expanded="false" />
+            <element signature="n#!!block;n#cover#0" expanded="false" />
+            <element signature="n#!!doc;n#uncover#0" expanded="false" />
+            <element signature="n#!!block;n#uncover#0" expanded="false" />
+            <element signature="n#!!doc;n#Player#0" expanded="false" />
+            <element signature="n#!!doc;n#constructor#0;n#Player#0" expanded="false" />
+            <element signature="e#1038#1469#0" expanded="false" />
+            <element signature="e#1793#2024#0" expanded="false" />
+            <element signature="n#!!doc;n#disconnect#0;n#Player#0" expanded="false" />
+            <element signature="n#!!block;n#disconnect#0;n#Player#0" expanded="false" />
+            <element signature="n#!!doc;n#play#0;n#Player#0" expanded="false" />
+            <element signature="e#2539#3653#0" expanded="false" />
+            <element signature="e#3475#3579#0" expanded="false" />
+            <marker date="1466041621342" expanded="true" signature="2718:2731" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:2740" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2732:3621" ph="..." />
+            <marker date="1466041621342" expanded="false" signature="2863:3425" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2923:3384" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="2985:3132" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3058:3076" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3193:3339" ph="..." />
+            <marker date="1466041621342" expanded="true" signature="3266:3283" ph="..." />
           </folding>
         </state>
       </provider>
