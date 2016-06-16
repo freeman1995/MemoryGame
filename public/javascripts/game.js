@@ -103,7 +103,7 @@ class Player {
                                               <div class="card" style="background: silver"></div>
                                           </div>
                                           <div class="back">
-                                              <div class="card" style="background: green"></div>
+                                              <div class="card"></div>
                                           </div>
                                       </div>
                                   </div>`);
