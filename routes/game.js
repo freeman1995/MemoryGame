@@ -80,7 +80,7 @@ function subscribe(socketIoServer, socket) {
     socket.on('disconnect', () => {
         if (socket.name) {
             socket.partner.emit('opponentLeft');
-            socket.game = null;
+            socket.partner.game = null;
             console.log('\n' + socket.name + ' has disconnected\n');
         }
     });
