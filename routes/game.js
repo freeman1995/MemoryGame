@@ -116,7 +116,7 @@ function subscribe(socketIoServer, socket) {
                 socket.partner.emit('success', index, game.board[index].val, false, socket.partner.score);
                 game.board[index].covered = false;
                 socket.score++;
-
+                
                 if (!--socket.game.coveredPairsCount) {
                     let result = socket.score == socket.partner.score ?
                         -1 : socket.score > socket.partner.score ? socket.id : socket.partner.id;
@@ -128,8 +128,8 @@ function subscribe(socketIoServer, socket) {
                 socket.partner.emit('fail', socket.prevIndex, index, game.board[index].val, false);
                 game.board[index].covered = true;
                 game.board[socket.prevIndex].covered = true;
+                socket.game.currTurn = socket.partner;
             }
-            socket.game.currTurn = socket.partner;
             socket.prevIndex = -1;
         } else {
             socket.emit('squareUncover', index, game.board[index].val);
